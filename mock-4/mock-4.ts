@@ -48,7 +48,7 @@ console.log(isValidBST(tree2)); // Output: false
 // # Output: False
 
 function canJump(nums: number[]): boolean {
-  let maxReach = 0; // Tracks the farthest index we can reach
+  let maxReach = 0; 
 
   for (let i = 0; i < nums.length; i++) {
     if (i > maxReach) return false; // If we reach a point we can't jump past, return false
