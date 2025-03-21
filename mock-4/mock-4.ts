@@ -47,3 +47,21 @@ console.log(isValidBST(tree2)); // Output: false
 // # Input: nums = [3,2,1,0,4]
 // # Output: False
 
+function canJump(nums: number[]): boolean {
+  let maxReach = 0; // Tracks the farthest index we can reach
+
+  for (let i = 0; i < nums.length; i++) {
+    if (i > maxReach) return false; // If we reach a point we can't jump past, return false
+    maxReach = Math.max(maxReach, i + nums[i]); // Update the max reachable index
+    if (maxReach >= nums.length - 1) return true; // If we can reach the last index, return true
+  }
+
+  return false; // If loop finishes and last index isn't reached, return false
+}
+
+// ✅ Test Cases
+console.log(canJump([2, 3, 1, 1, 4])); // Output: true
+console.log(canJump([3, 2, 1, 0, 4])); // Output: false
+console.log(canJump([0])); // Output: true (Already at last index)
+console.log(canJump([2, 0, 0])); // Output: true (Can reach last index)
+console.log(canJump([1, 0, 2])); // Output: false (Gets stuck at index 1)
