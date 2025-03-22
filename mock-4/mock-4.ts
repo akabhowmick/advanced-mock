@@ -7,6 +7,37 @@
 // # Output: True
 // # Input: root = [5,1,4,null,null,3,6]
 // # Output: False
+class TreeNode {
+  value: number;
+  left: TreeNode | null;
+  right: TreeNode | null;
+
+  constructor(value: number, left: TreeNode | null = null, right: TreeNode | null = null) {
+    this.value = value;
+    this.left = left;
+    this.right = right;
+  }
+}
+
+function isValidBST(root: TreeNode | null, min: number = -Infinity, max: number = Infinity): boolean {
+  if (!root) return true; // Base case: Empty tree is a valid BST
+
+  if (root.value <= min || root.value >= max) return false; // Check BST condition
+
+  // Recursively check left and right subtrees with updated constraints
+  return isValidBST(root.left, min, root.value) && isValidBST(root.right, root.value, max);
+}
+
+// ✅ Test Cases
+const tree1 = new TreeNode(2, new TreeNode(1), new TreeNode(3));
+console.log(isValidBST(tree1)); // Output: true
+
+const tree2 = new TreeNode(5, 
+  new TreeNode(1), 
+  new TreeNode(4, new TreeNode(3), new TreeNode(6))
+);
+console.log(isValidBST(tree2)); // Output: false
+
 
 // # Jump Game
 // # Given an array where each element represents the maximum jump length, determine if you can reach the last index.
