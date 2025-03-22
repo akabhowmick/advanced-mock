@@ -72,3 +72,40 @@ function findMiddle(arr: number[]): number[] {
 // # Output: 6
 // # Input: height = [4,2,0,3,2,5]
 // # Output: 9
+
+function trapRainWater(height: number[]): number {
+  if (height.length === 0) return 0; // Edge case: No elevation, no water
+
+  let left = 0; 
+  let right = height.length - 1;
+  let leftMax = 0; 
+  let rightMax = 0;
+  let totalWater = 0;
+
+  while (left < right) {
+    if (height[left] < height[right]) {
+      if (height[left] >= leftMax) {
+        leftMax = height[left]; // Update left max height
+      } else {
+        totalWater += leftMax - height[left]; // Trap water at left index
+      }
+      left++; // Move left pointer to the right
+    } else {
+      if (height[right] >= rightMax) {
+        rightMax = height[right]; // Update right max height
+      } else {
+        totalWater += rightMax - height[right]; // Trap water at right index
+      }
+      right--; // Move right pointer to the left
+    }
+  }
+
+  return totalWater;
+}
+
+// ✅ Test Cases
+console.log(trapRainWater([0,1,0,2,1,0,1,3,2,1,2,1])); // Output: 6
+console.log(trapRainWater([4,2,0,3,2,5])); // Output: 9
+console.log(trapRainWater([0,0,0,0])); // Output: 0 (Flat surface, no trapped water)
+console.log(trapRainWater([3,0,0,2,0,4])); // Output: 10
+console.log(trapRainWater([])); // Output: 0 (Empty array)
