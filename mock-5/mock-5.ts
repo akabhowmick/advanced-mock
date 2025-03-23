@@ -8,6 +8,63 @@
 // # Input: head = [1,2,3,4,5,6]
 // # Output: [4,5,6]
 
+class ListNode {
+  value: number;
+  next: ListNode | null;
+
+  constructor(value: number, next: ListNode | null = null) {
+    this.value = value;
+    this.next = next;
+  }
+}
+
+class LinkedList {
+  head: ListNode | null;
+
+  constructor() {
+    this.head = null;
+  }
+
+  append(value: number) {
+    const newNode = new ListNode(value);
+    if (!this.head) {
+      this.head = newNode;
+      return;
+    }
+
+    let current = this.head;
+    while (current.next) {
+      current = current.next;
+    }
+    current.next = newNode;
+  }
+}
+
+function middleNode(head: ListNode | null): ListNode | null {
+  let slow: ListNode | null = head;
+  let fast: ListNode | null = head;
+
+  while (fast !== null && fast.next !== null) {
+    slow = slow!.next;
+    fast = fast.next.next;
+  }
+  return slow;
+}
+
+function findMiddle(arr: number[]): number[] {
+  if (arr.length === 0) return [];
+
+  let slow = 0;
+  let fast = 0;
+
+  while (fast < arr.length - 1) {
+    slow++;
+    fast += 2;
+  }
+
+  return arr.slice(slow);
+}
+
 // # Trapping Rain Water
 // # Given an elevation map, compute how much water it can trap after raining.
 // # Example:
