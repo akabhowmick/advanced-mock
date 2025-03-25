@@ -7,6 +7,32 @@
 // # Output: 1
 // # Input: enqueue(3), enqueue(4), enqueue(5), dequeue(), dequeue()
 // # Output: 3, 4
+class QueueUsingStacks {
+  private stack1: number[];
+  private stack2: number[];
+
+  constructor() {
+    this.stack1 = [];
+    this.stack2 = [];
+  }
+
+  // Enqueue operation (Push onto stack1)
+  enqueue(value: number): void {
+    this.stack1.push(value);
+  }
+
+  // Dequeue operation (Pop from stack2, refill from stack1 if empty)
+  dequeue(): number | undefined {
+    if (this.stack2.length === 0) {
+      while (this.stack1.length > 0) {
+        this.stack2.push(this.stack1.pop()!); // Move elements to stack2
+      }
+    }
+
+    return this.stack2.pop(); // Pop from stack2 (FIFO order)
+  }
+}
+
 
 // # Reverse Nodes in k-Group
 // # Given a linked list, reverse the nodes of the list k at a time and return the modified list.
