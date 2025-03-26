@@ -8,15 +8,6 @@
 // # Input: head = [1,2,3,4,5,6]
 // # Output: [4,5,6]
 
-class ListNode {
-  value: number;
-  next: ListNode | null;
-
-  constructor(value: number, next: ListNode | null = null) {
-    this.value = value;
-    this.next = next;
-  }
-}
 
 class LinkedList {
   head: ListNode | null;

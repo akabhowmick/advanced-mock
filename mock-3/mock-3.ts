@@ -33,7 +33,6 @@ class QueueUsingStacks {
   }
 }
 
-
 // # Reverse Nodes in k-Group
 // # Given a linked list, reverse the nodes of the list k at a time and return the modified list.
 // # Example:
@@ -42,3 +41,42 @@ class QueueUsingStacks {
 // # Input: head = [1,2,3,4,5,6], k = 3
 // # Output: [3,2,1,6,5,4]
 
+class ListNode {
+  val: number;
+  next: ListNode | null;
+  constructor(val?: number, next?: ListNode | null) {
+    this.val = val === undefined ? 0 : val;
+    this.next = next === undefined ? null : next;
+  }
+}
+
+function reverseKGroup(head: ListNode | null, k: number): ListNode | null {
+  if (k == 1) {
+    return head;
+  }
+
+  let n = 0;
+  let cur = head;
+  while (cur != null) {
+    n++;
+    cur = cur.next;
+  }
+  let dummy = new ListNode();
+  dummy.next = head;
+  let preLeft = dummy;
+  while (n >= k) {
+    // reverse
+    let cur = preLeft.next;
+    let next = cur!.next;
+    for (let i = 1; i < k; i++) {
+      cur!.next = next!.next;
+      next!.next = preLeft.next;
+      preLeft.next = next;
+      next = cur!.next;
+    }
+
+    preLeft = cur!;
+    n = n - k;
+  }
+  return dummy.next;
+}
